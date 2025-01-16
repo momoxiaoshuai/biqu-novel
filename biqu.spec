@@ -3,11 +3,11 @@
 block_cipher = None
 
 a = Analysis(
-    ['biqu_gui.py'],
+    ['src/biqu_gui.py'],
     pathex=[],
     binaries=[],
     datas=[
-        ('alien.png', '.'),
+        ('assets/alien.png', 'assets'),
     ],
     hiddenimports=[
         'bs4',

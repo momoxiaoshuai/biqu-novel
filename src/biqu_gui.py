@@ -7,6 +7,15 @@ from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtGui import QFont, QIcon
 from biqu import NovelDownloader
 
+def get_asset_path(filename):
+    if getattr(sys, 'frozen', False):
+        # 如果是打包后的可执行文件
+        base_path = sys._MEIPASS
+    else:
+        # 如果是开发环境
+        base_path = os.path.dirname(os.path.dirname(__file__))
+    return os.path.join(base_path, 'assets', filename)
+
 class DownloadWorker(QThread):
     progress = pyqtSignal(int, int)  # 当前章节，总章节
     finished = pyqtSignal(bool, str)  # 成功/失败，消息
@@ -58,7 +67,7 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(600, 400)
         
         # 设置应用图标
-        icon_path = os.path.join(os.path.dirname(__file__), "alien.png")
+        icon_path = get_asset_path('alien.png')
         if os.path.exists(icon_path):
             self.setWindowIcon(QIcon(icon_path))
         
@@ -374,7 +383,7 @@ def main():
     app = QApplication(sys.argv)
     
     # 设置应用程序图标（在任务栏显示）
-    icon_path = os.path.join(os.path.dirname(__file__), "alien.png")
+    icon_path = get_asset_path('alien.png')
     if os.path.exists(icon_path):
         app.setWindowIcon(QIcon(icon_path))
     
