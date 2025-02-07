@@ -4,7 +4,7 @@
 
 ## 小说来源
 
-本工具从 [笔趣阁(www.biqg.cc)](https://www.biqg.cc) 网站获取小说资源。
+本工具从 [笔趣阁(www.bi02.cc)](https://www.bi02.cc) 网站获取小说资源。
 
 ## 功能特点
 
