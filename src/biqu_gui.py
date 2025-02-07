@@ -335,7 +335,7 @@ class MainWindow(QMainWindow):
             self.start_download(novel_data)
             
     def start_download(self, novel_data):
-        url = f"https://www.biqg.cc{novel_data['url_list']}"
+        url = f"https://www.bi02.cc{novel_data['url_list']}"
         self.progress_bar.setVisible(True)
         self.progress_bar.setValue(0)
         self.cancel_button.setVisible(True)  # 显示取消按钮
