@@ -12,6 +12,9 @@ from threading import Lock
 from colorama import init, Fore, Style
 from tqdm import tqdm
 
+# 基本配置
+BASE_URL = "https://www.qu02.cc/"  # 网站域名配置，方便后续修改
+
 # 初始化colorama
 init(autoreset=True)
 
@@ -65,11 +68,11 @@ class NovelDownloader:
     def search(self, key_word):
         new_header = copy.deepcopy(HEADERS)
         new_header["referer"] = urllib.parse.quote(
-            f"https://www.bi02.cc/s?q={key_word}", safe="/&=:?"
+            f"{BASE_URL}/s?q={key_word}", safe="/&=:?"
         )
 
         hm_url = urllib.parse.quote(
-            f"https://www.bi02.cc/user/hm.html?q={key_word}", safe="/&=:?"
+            f"{BASE_URL}/user/hm.html?q={key_word}", safe="/&=:?"
         )
         
         if not self.get_hm_cookie(hm_url):
@@ -78,7 +81,7 @@ class NovelDownloader:
         params = {"q": key_word}
         try:
             response = self.session.get(
-                "https://www.bi02.cc/user/search.html",
+                f"{BASE_URL}/user/search.html",
                 params=params,
                 headers=new_header,
                 timeout=10,
@@ -94,7 +97,7 @@ class NovelDownloader:
             
         tag, href, index = args
         title = tag.text.strip()
-        url = f"https://www.bi02.cc{href}"
+        url = f"{BASE_URL}{href}"
         
         max_retries = 3
         for attempt in range(max_retries):
@@ -251,7 +254,7 @@ def main():
                 num = int(choice)
                 if 1 <= num <= len(data_list):
                     item = data_list[num-1]
-                    url = f"https://www.bi02.cc{item['url_list']}"
+                    url = f"{BASE_URL}{item['url_list']}"
                     downloader.download_novel(url, item['articlename'], item['author'])
                     break
                 else:

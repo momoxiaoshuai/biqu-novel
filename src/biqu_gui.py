@@ -5,7 +5,7 @@ from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                             QLabel, QProgressBar, QMessageBox, QListWidgetItem)
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtGui import QFont, QIcon
-from biqu import NovelDownloader
+from biqu import NovelDownloader, BASE_URL
 
 def get_asset_path(filename):
     if getattr(sys, 'frozen', False):
@@ -335,7 +335,7 @@ class MainWindow(QMainWindow):
             self.start_download(novel_data)
             
     def start_download(self, novel_data):
-        url = f"https://www.bi02.cc{novel_data['url_list']}"
+        url = f"{BASE_URL}{novel_data['url_list']}"
         self.progress_bar.setVisible(True)
         self.progress_bar.setValue(0)
         self.cancel_button.setVisible(True)  # 显示取消按钮
